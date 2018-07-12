@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\title{Natural log formula with Harmonic Numbers}
+\author{Gareth Booth}
+\usepackage[a4paper,left=28mm,top=25mm,right=28mm,bottom=15mm]{geometry}
+\date{October 2015}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In this paper, the following formula will be derived.
+\begin{equation} \label{eq:derived}
+    \ln(x)=\sum_{n=1}^{\infty}{\frac{{\left(x-1\right)}^{n}}{x^{n+1}}}H_n
+\end{equation}
+Where $H_{n}$ is the $n$th Harmonic Number
+
+\section{Derivation}
+This formula can be derived by beginning with the following infinite series and rearranging.
+
+\begin{equation} \label{eq:2}
+0=\sum_{n=1}^{\infty}{\frac{1}{x^n}\left(\frac{1}{n+1}-\frac{1}{n+1} \right)}
+\end{equation}
+
+From the definition of harmonic numbers,
+$$\frac{1}{n+1}=H_{n+1}-H_{n}$$
+
+Substituting this into \eqref{eq:2} gives the following
+  \begin{align*}
+0&=\sum_{n=1}^{\infty}{\frac{1}{x^n}\left(\frac{1}{n+1}-\left(H_{n+1}-H_{n}\right)\right)}\\
+&=\sum_{n=1}^{\infty}{\frac{1}{x^n}\left(\frac{1}{n+1}-H_{n+1}+H_{n}\right)}\\
+&=\sum_{n=1}^{\infty}{\left(\frac{1}{x^n\left(n+1\right)}-\frac{H_{n+1}}{x^n}+\frac{H_{n}}{x^n}\right)}\\
+0&=\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}-\sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}+\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}
+  \end{align*}
+Add $1-H_1$ (which equates to $0$) to the right hand side.
+  \begin{align*}
+0&=1-H_1+\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}-\sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}+\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}\\
+&=\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}+1-H_1-\sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}+\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}\\
+0&=\left(\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}+1\right)-\left(H_1+ \sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}\right )+\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}\\
+  \end{align*}
+\begin{equation} \label{eq:3}
+\left(\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}+1\right)=\left(H_1+ \sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}\right )-\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}
+\end{equation}
+
+ \vspace{1cm}
+ 
+  Because $\displaystyle\frac{1}{x^0\left(0+1\right)}=1$, it is evident that 
+  $$\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}+1=\sum_{n=0}^{\infty}{\frac{1}{x^n\left(n+1\right)}}$$
+  Take out a factor of $x$ on the right hand side
+    $$\sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}+1=x\sum_{n=0}^{\infty}{\frac{1}{x^{n+1}\left(n+1\right)}}$$
+Substituting $n$ for $n-1$ in the right hand side gives
+\begin{equation} \label{eq:4}
+    \sum_{n=1}^{\infty}{\frac{1}{x^n\left(n+1\right)}}+1=x\sum_{n=1}^{\infty}{\frac{1}{nx^{n}}}
+  \end{equation}
+
+  \vspace{1cm}
+
+  Similarly, because $\displaystyle\frac{H_{0+1}}{x^0}=1$, it is evident that
+  $$H_1+ \sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}=\sum_{n=0}^{\infty}{\frac{H_{n+1}}{x^n}}$$
+  Take out a factor of $x$ on the right hand side
+  $$H_1+ \sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}=x\sum_{n=0}^{\infty}{\frac{H_{n+1}}{x^{n+1}}}$$
+Substituting $n$ for $n-1$ in the right hand side gives
+  \begin{equation} \label{eq:5}
+  H_1+ \sum_{n=1}^{\infty}{\frac{H_{n+1}}{x^n}}=x\sum_{n=1}^{\infty}{\frac{H_{n}}{x^{n}}}
+  \end{equation}
+  
+
+Substitute \eqref{eq:4} and \eqref{eq:5} into \eqref{eq:3}. 
+$$x\sum_{n=1}^{\infty}{\frac{1}{nx^{n}}}=x\sum_{n=1}^{\infty}{\frac{H_{n}}{x^{n}}}-\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}$$
+Factor out $\displaystyle\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}$ on the right hand side.
+$$x\sum_{n=1}^{\infty}{\frac{1}{nx^{n}}}=\left(x-1\right)\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}$$
+\begin{equation} \label{eq:6}
+\therefore \frac{x}{x-1}\sum_{n=1}^{\infty}{\frac{1}{nx^{n}}}=\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}
+\end{equation}
+
+  \vspace{1cm}
+
+The Mercator series states the following:
+$$\ln{(1+x)}=\sum_{n=1}^{\infty}{\frac{\left(-1 \right)^{n+1}}{n}x^n}$$
+Substitute $x$ for $\displaystyle-\frac{1}{x}$.
+$$\ln{\left(1-\frac{1}{x} \right )}=\sum_{n=1}^{\infty}{\frac{\left(-1 \right)^{n+1}}{n}{\left(-\frac{1}{x} \right )}^n}$$
+$$\ln{\left(\frac{x-1}{x} \right )}=\sum_{n=1}^{\infty}{\frac{\left(-1 \right)^{n+1}\left(-1 \right)^{n}}{nx^{n}}}$$
+$$-\ln{\left(\frac{x-1}{x} \right )}=-\sum_{n=1}^{\infty}{\frac{-\left(-1 \right)^{2n}}{nx^{n}}}$$
+\begin{equation} \label{eq:7}
+\ln{\left(\frac{x}{x-1}\right)}=\sum_{n=1}^{\infty}{\frac{1}{nx^{n}}}
+\end{equation}
+    
+  \vspace{0.5cm}
+
+Substituting \eqref{eq:7} into \eqref{eq:6} gives
+$$\frac{x}{x-1}\ln\left(\frac{x}{x-1} \right )=\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}$$
+$$\ln\left(\frac{x}{x-1} \right )=\frac{x-1}{x}\sum_{n=1}^{\infty}{\frac{H_{n}}{x^n}}$$
+$$\ln\left(\frac{x}{x-1} \right )=\left(x-1 \right )\sum_{n=1}^{\infty}{\frac{H_{n}}{x^{n+1}}}$$
+Substitute $x$ for $\displaystyle\frac{x}{x-1}$. Because $\displaystyle\frac{\frac{x}{x-1}}{\frac{x}{x-1}-1}=x$, 
+    \begin{align*}
+\ln\left(x \right )&=\left(\frac{x}{x-1}-1 \right )\sum_{n=1}^{\infty}{\frac{H_{n}}{{\left(\frac{x}{x-1}\right)}^{n+1}}}\\
+&=\left(\frac{1}{x-1} \right )\sum_{n=1}^{\infty}{\frac{H_{n}}{{\left(\frac{x}{x-1}\right)}^{n+1}}}\\
+&=\sum_{n=1}^{\infty}{\frac{H_{n}}{\left(x-1 \right ){\left(x-1 \right )}^{-n-1}x^{n+1}}}\\
+\ln\left(x \right )&=\sum_{n=1}^{\infty}{\frac{{\left(x-1 \right )}^{n}}{x^{n+1}}H_{n}}\\
+    \end{align*}
+Q.E.D.
+
+\section{Slightly more general formula}
+
+This result can be used to prove a more general formula.
+    \begin{align*}
+\beta\ln\left(\beta \right )&=\sum_{n=1}^{\infty}{{\left(\frac{\beta-1}{\beta} \right )}^n H_{n}}\\
+&=\sum_{n=1}^{\infty}{{\left(\frac{\alpha\left(\beta-1 \right )}{\alpha\beta} \right )}^n H_{n}}\\
+&=\sum_{n=1}^{\infty}{{\left(\frac{\alpha\beta-\alpha}{\alpha\beta} \right )}^n H_{n}}
+    \end{align*}
+Substitute $\displaystyle\frac{x}{\alpha}=\beta,\hspace{0.5cm} x=\alpha\beta$
+    $$\frac{x}{\alpha}\ln\left(\frac{x}{\alpha} \right )=\sum_{n=1}^{\infty}{{\left(\frac{x-\alpha}{x} \right )}^n H_{n}}$$
+
+\section{Convergence}
+Using the ratio test, the convergence of this series can be established.\\\\
+Let $\displaystyle a_n={{\left(\frac{x-\alpha}{x} \right )}^n H_{n}}.$
+Begin with $\displaystyle L=\lim_{n\to\infty}{\left|\frac{a_{n+1}}{a_n} \right|}.$
+Substituting and simplifying will result in $\displaystyle L=\left|\frac{x-\alpha}{x}\right|\lim_{n\to\infty}{\frac{H_{n+1}}{H_n}}.$
+The limit can be easily evaluated by making the substitution $\displaystyle H_{n+1}=H_n+\frac{1}{n+1}.$
+It then follows that $\displaystyle\lim_{n\to\infty}{\frac{H_{n+1}}{H_n}}=1+\lim_{n\to\infty}{\frac{1}{H_n\left(n+1\right)}=1.$
+It can bee seen that when $L=1$ (i.e. $\alpha=0$) the series diverges.
+Therefore the series converges when $\displaystyle\left|\frac{x-\alpha}{x}\right|<1$ or equivalently when $\displaystyle x>\frac{\alpha}{2}$ for positive $\alpha.$
+
+
+
+\end{document}

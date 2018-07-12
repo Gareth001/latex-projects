@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[a4paper,left=25mm,top=20mm,right=25mm,bottom=20mm]{geometry}
+
+\title{MATH3401 Assignment 6}
+\author{Gareth Booth, 44353027}
+
+\begin{document}
+
+\maketitle
+
+\section{Q5}
+Equations used:
+\begin{enumerate}
+  \item $\displaystyle \frac{1}{1-z}=\sum_{n=0}^{\infty} z^n\text{ (Geometric Series)}$
+  \item $\displaystyle \left(1+z\right)^n=\sum_{k=0}^n {n\choose k}z^k\text{ (Binomial coefficient definition)}$
+  \item $\displaystyle {n \choose k} + {n \choose k+1} = {n+1 \choose k+1}\text{ (Pascal's Rule)}$
+  \item $\displaystyle {n \choose n} = {n \choose 0} = 1, n\geq 0$
+  \item $\left\lfloor \left(m-1\right)/2\right\rfloor=\left\lfloor m/2\right\rfloor,m\text{ odd}$
+  \item $\left\lfloor \left(m+1\right)/2\right\rfloor=\left\lfloor m/2\right\rfloor+1,m\text{ odd}$
+  \item $\left\lfloor m/2\right\rfloor=1+\left\lfloor \left(m-1\right)/2\right\rfloor=\left\lfloor \left(m+1\right)/2\right\rfloor, m\text{ even}$
+\end{enumerate}
+We are given $S$.
+
+
+\begin{align*} 
+S   &=\frac{1}{1-z-z^2} \\ 
+    &=\frac{1}{1-\left(z+z^2\right)}\\
+    &=\sum_{n=0}^{\infty} \left(z+z^2\right)^n\qquad\text{(1)}\\
+    &=\sum_{n=0}^{\infty}z^n \left(1+z\right)^n\\
+    &=\sum_{n=0}^{\infty}z^n \sum_{k=0}^n {n\choose k}z^k\qquad\text{(2)}\\
+S   &=\sum_{n=0}^{\infty}\sum_{k=0}^n {n\choose k}z^{n+k}
+\end{align*}
+We investigate the coefficients of $z^l$ (in the outer sum) for each $l$. Clearly, $z^l$ terms will only appear when $n\leq l$, since $k\geq 0$.
+So for $z^l$, we must investigate the appearances of $z^l$ terms for $n\leq l$.
+
+We see that every appearance of $z^l$ in these partial sums must be of the form $\displaystyle{n\choose k}z^{l}$ for $l=k+n$, and clearly $k\leq n$. So the coefficients of $z^l$ will be the sum of these binomial coefficients satisfying $l=k+n$ and $k\leq n$. Therefore,
+$$S=\sum_{l=0}^{\infty}c_lz^l$$
+for
+$$c_l=\sum_{\substack{n,k\in \mathbb{N}_0 \\ l=n+k \\ k\leq n}} {n\choose k}$$
+We seek to evaluate $c_l$. First, we wish to change this expression into a precise summation. Apply $l=n+k$.
+$$c_l=\sum_{\substack{n,k\in \mathbb{N}_0 \\ l=n+k \\ k\leq n}} {l-k\choose k}$$
+Note that we may write $l=n+k$ for integers $n,k$ with $k\leq n$ exactly when $\displaystyle k\leq\left\lfloor\frac{l}{2}\right\rfloor$. (e.g. for $5=3+2$, $2$ is the largest possible $k$, for $6=3+3$, $3$ is the largest possible $k$, this pattern continues. Also note the cases $l=0$ and $l=1$ are still valid here.) We may therefore write the sum as 
+$$c_l=\sum_{k=0}^{\left\lfloor l/2\right\rfloor} {l-k\choose k}$$
+We claim that $c_l=F_{l+1}$, where $F_l$ is the $l$th Fibonacci number, i.e $c_l$ is a sequence satisfying $c_0=1$, $c_1=1$ and $c_m=c_{m-1}+c_{m-2}$ for $m\geq 2$.\\
+\textbf{Proof by induction.}\\
+Base cases.
+$$c_0=\sum_{k=0}^{\left\lfloor 0/2\right\rfloor} {0-k\choose k}=\sum_{k=0}^0 {0-k\choose k}={0\choose 0}=1\qquad\text{(4)}$$
+$$c_1=\sum_{k=0}^{\left\lfloor 0/2\right\rfloor} {0-k\choose k}=\sum_{k=0}^0 {0-k\choose k}={0\choose 0}=1\qquad\text{(4)}$$
+Assume $l=m$ and $l=m-1$ are true. Show $l=m+1$ holds.
+$$c_{m+1} = c_{m}+c_{m-1}$$
+Perform induction step.
+$$c_{m+1}= \sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-k\choose k}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k}$$
+Case $m$ odd. 
+$$RHS=\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-k\choose k}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k}\qquad\text{(5)}$$
+Change summations, sub $k\rightarrow k+1$ in 1st sum. This is valid because $\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-k\choose k}=\sum_{k=0}^{\left\lfloor m/2\right\rfloor+1} {m-k\choose k}$, and so the new sum will contain the same terms as the original.
+
+\begin{align*} 
+RHS   &=\sum_{k+1=0}^{\left\lfloor m/2\right\rfloor} {m-\left(k+1\right)\choose k+1}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k} \\ 
+    &=\sum_{k=-1}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k+1}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k}\\
+    &={m \choose 0}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k+1}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k}\\
+    &={m+1 \choose 0}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-1-k\choose k+1}+{m-1-k\choose k}\qquad\text{(4)}\\
+    &={m+1 \choose 0}+\sum_{k=0}^{\left\lfloor m/2\right\rfloor} {m-k\choose k+1}\qquad\text{(3)}\\
+    &={m+1 \choose 0}+\sum_{k-1=0}^{\left\lfloor m/2\right\rfloor+1} {m-\left( k-1\right)\choose \left( k-1\right)+1}\qquad\text{(sub $k\rightarrow k-1$, keeping no. of terms the same)}\\
+    &={m+1 \choose 0}+\sum_{k=1}^{\left\lfloor \left(m+1\right)/2\right\rfloor} {m+1-k\choose k}\qquad\text({6})\\
+    &=\sum_{k=0}^{\left\lfloor \left(m+1\right)/2\right\rfloor} {m+1-k\choose k}\\
+RHS &=c_{m+1}=LHS
+\end{align*}
+Case $m$ even.
+$$RHS=\sum_{k=0}^{1+\left\lfloor \left(m-1\right)/2\right\rfloor} {m-k\choose k}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k}\qquad\text{(7)}$$
+As before, sub $k\rightarrow k+1$ in 1st sum. This time we must decrease the sum range, as $\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor+1} {m-k\choose k} \neq \sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-k\choose k}$.
+\begin{align*} 
+RHS &=\sum_{k=-1}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k+1}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k}\\
+    &={m\choose 0}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k+1}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k}\\
+    &={m+1\choose 0}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor} {m-1-k\choose k+1}+ {m-1-k\choose k}\qquad\text{(4)}\\
+    &={m+1\choose 0}+\sum_{k=0}^{\left\lfloor \left(m-1\right)/2\right\rfloor}{m-k\choose k+1}\qquad\text{(3)}\\
+    &={m+1\choose 0}+\sum_{k=1}^{\left\lfloor \left(m-1\right)/2\right\rfloor+1}{m+1-k\choose k}\qquad\text{(sub $k\rightarrow k-1$, keeping no. of terms the same)}\\
+    &=\sum_{k=0}^{\left\lfloor \left(m+1\right)/2\right\rfloor}{m+1-k\choose k}\qquad{\text{(7)}}\\
+RHS &=c_{m+1}=LHS
+\end{align*}
+By the induction hypothesis, the statement is true and so $c_l=F_{l+1}$, as required. $\square$\\
+Radius of Convergence.
+$$\Lambda = \lim_{n\to\infty}\left|\frac{c_{n+1}}{c_{n}} \right| = \lim_{n\to\infty}\left|\frac{F_{n+2}}{F_{n+1}} \right|= \lim_{n\to\infty}\frac{F_{n+2}}{F_{n+1}}$$
+$$= \lim_{n\to\infty}\frac{F_{n+1}+F_{n}}{F_{n+1}}$$
+$$= \lim_{n\to\infty}1+\frac{F_{n}}{F_{n+1}}$$
+$$\Lambda= 1+\lim_{n\to\infty}\frac{F_{n}}{F_{n+1}}$$
+$$\Lambda-1=\lim_{n\to\infty}\frac{F_{n}}{F_{n+1}}$$
+$$=\lim_{n\to\infty}\frac{F_{n}}{F_{n}+F_{n-1}}$$
+$$=\lim_{n\to\infty}\frac{1}{1+F_{n-1}/F_n}$$
+$$\Lambda-1=\frac{1}{1+\lim_{n\to\infty}F_{n-1}/F_n} $$
+$$\Lambda-1=\frac{1}{1+\Lambda-1} $$
+$$\Lambda\left(\Lambda-1\right)=1 $$
+$$\Lambda^2-\Lambda-1=0 $$
+Therefore $\displaystyle\Lambda=\frac{1+\sqrt{5}}{2}$ (since $\Lambda$ cannot be negative). This means $R=1/\Lambda=\displaystyle\frac{2}{1+\sqrt{5}}$.\\
+Name of Sequence. As we have shown above, this sequence $c_l$ is the Fibonacci sequence shifted by 1 to the left.
+\end{document}
