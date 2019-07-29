@@ -1,2 +1,2 @@
-"# latex-projects" 
+# latex-projects
 Various LaTeX projects worth sharing
